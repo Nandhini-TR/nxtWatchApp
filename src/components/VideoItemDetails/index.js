@@ -1,4 +1,6 @@
 import {Component} from 'react'
+import ReactPlayer from 'react-player'
+import {formatDistanceToNow} from 'date-fns'
 import {Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
@@ -8,11 +10,9 @@ import {
   GamingContainer,
   SideMenuContainer,
   HomeSideContainer,
-  GameOptionContainer,
   EachOptionContainer,
   HomeIcon,
   HomeTitle,
-  CurrentTitle,
   TrendingIcon,
   GamingIcon,
   SavedVideoIcon,
@@ -26,15 +26,20 @@ import {
   FailureDescriptionHeading,
   FailureDescription,
   RetryButton,
-  IconContainer,
-  TrendingIconBanner,
-  TrendingBanner,
-  TrendingBannerHeading,
-  TrendingBgContainer,
-  GamingListContainer,
-  Image,
+  VideoDetailsBgContainer,
+  VideoDetailsContainer,
+  LikesContainer,
+  LikeButton,
+  DisLikeButton,
   ImageTitle,
   ImageName,
+  LikeIcon,
+  DisLikeIcon,
+  SaveIcon,
+  Line,
+  ProfileImage,
+  ChannelContainer,
+  Description,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -44,18 +49,27 @@ const apiStatusConstants = {
   inProgress: 'IN_PROGRESS',
 }
 
-class Gaming extends Component {
-  state = {apiStatus: apiStatusConstants.initial, gamingVideosList: []}
+class VideoItemDetails extends Component {
+  state = {
+    apiStatus: apiStatusConstants.initial,
+    videoItemList: {},
+    isLiked: false,
+    isDisLiked: false,
+  }
 
   componentDidMount() {
     this.getGamingVideos()
   }
 
   getGamingVideos = async () => {
+    const {match} = this.props
+    const {params} = match
+    const {id} = params
+
     this.setState({apiStatus: apiStatusConstants.inProgress})
 
     const jwtToken = Cookies.get('jwt_token')
-    const apiUrl = 'https://apis.ccbp.in/videos/gaming'
+    const apiUrl = `https://apis.ccbp.in/videos/${id}`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -66,15 +80,26 @@ class Gaming extends Component {
     const response = await fetch(apiUrl, options)
     if (response.ok) {
       const data = await response.json()
-      const modifiedData = data.videos.map(eachVideo => ({
-        id: eachVideo.id,
-        title: eachVideo.title,
-        thumbnailUrl: eachVideo.thumbnail_url,
-        viewCount: eachVideo.view_count,
-      }))
+
+      const modifiedData = {
+        videoDetails: {
+          id: data.video_details.id,
+          title: data.video_details.title,
+          videoUrl: data.video_details.video_url,
+          thumbnailUrl: data.video_details.thumbnail_url,
+          channel: {
+            name: data.video_details.channel.name,
+            profileImageUrl: data.video_details.channel.profile_image_url,
+            subscriberCount: data.video_details.channel.subscriber_count,
+          },
+          viewCount: data.video_details.view_count,
+          publishedAt: data.video_details.published_at,
+          description: data.video_details.description,
+        },
+      }
 
       this.setState({
-        gamingVideosList: modifiedData,
+        videoItemList: modifiedData,
         apiStatus: apiStatusConstants.success,
       })
     } else {
@@ -82,35 +107,94 @@ class Gaming extends Component {
     }
   }
 
+  onClickLike = () => {
+    this.setState(prevState => ({
+      isLiked: !prevState.isLiked,
+      isDisLiked: false,
+    }))
+  }
+
+  onClickDisLike = () => {
+    this.setState(prevState => ({
+      isDisLiked: !prevState.isLiked,
+      isLiked: false,
+    }))
+  }
+
   renderSuccess = isLight => {
-    const {gamingVideosList} = this.state
+    const {videoItemList, isLiked, isDisLiked} = this.state
+
+    const {
+      title,
+      videoUrl,
+      viewCount,
+      publishedAt,
+      description,
+    } = videoItemList.videoDetails
+    const {
+      name,
+      profileImageUrl,
+      subscriberCount,
+    } = videoItemList.videoDetails.channel
+
+    const dateObject = new Date(publishedAt)
+    const publishedDate = formatDistanceToNow(dateObject, {addSuffix: true})
 
     return (
       <HomePageContainer>
-        <TrendingBanner isLight={isLight}>
-          <IconContainer isLight={isLight}>
-            <TrendingIconBanner />
-          </IconContainer>
-          <TrendingBannerHeading isLight={isLight}>
-            Gaming
-          </TrendingBannerHeading>
-        </TrendingBanner>
-        <TrendingBgContainer isLight={isLight}>
-          {gamingVideosList.map(eachVideo => (
-            <Link
-              to={`/videos/${eachVideo.id}`}
-              style={{textDecoration: 'none'}}
-            >
-              <GamingListContainer key={eachVideo.id}>
-                <Image src={eachVideo.thumbnailUrl} alt="video thumbnail" />
-                <ImageTitle isLight={isLight}>{eachVideo.title}</ImageTitle>
-                <ImageName
+        <VideoDetailsBgContainer isLight={isLight}>
+          <ReactPlayer url={videoUrl} controls />
+          <ImageTitle isLight={isLight}>{title}</ImageTitle>
+          <VideoDetailsContainer>
+            <ImageName
+              isLight={isLight}
+            >{`${viewCount} views . ${publishedDate}`}</ImageName>
+            <LikesContainer>
+              <LikeButton
+                isLight={isLight}
+                isLiked={isLiked}
+                isDisLiked={isDisLiked}
+                type="button"
+                onClick={this.onClickLike}
+              >
+                <LikeIcon
                   isLight={isLight}
-                >{`${eachVideo.viewCount} Watching Worldwide`}</ImageName>
-              </GamingListContainer>
-            </Link>
-          ))}
-        </TrendingBgContainer>
+                  isLiked={isLiked}
+                  isDisLiked={isDisLiked}
+                />{' '}
+                Like
+              </LikeButton>
+              <DisLikeButton
+                isLight={isLight}
+                isDisLiked={isDisLiked}
+                isLiked={isLiked}
+                type="button"
+                onClick={this.onClickDisLike}
+              >
+                <DisLikeIcon
+                  isLight={isLight}
+                  isLiked={isLiked}
+                  isDisLiked={isDisLiked}
+                />{' '}
+                DisLike
+              </DisLikeButton>
+              <LikeButton isLight={isLight}>
+                <SaveIcon isLight={isLight} /> Save
+              </LikeButton>
+            </LikesContainer>
+          </VideoDetailsContainer>
+          <Line isLight={isLight} />
+          <ChannelContainer>
+            <ProfileImage src={profileImageUrl} alt="" />
+            <HomeSideContainer>
+              <ImageTitle isLight={isLight}>{name}</ImageTitle>
+              <ImageName isLight={isLight}>
+                {subscriberCount} subscribers
+              </ImageName>
+            </HomeSideContainer>
+          </ChannelContainer>
+          <Description isLight={isLight}>{description}</Description>
+        </VideoDetailsBgContainer>
       </HomePageContainer>
     )
   }
@@ -144,7 +228,7 @@ class Gaming extends Component {
     </div>
   )
 
-  renderGamingVideosPage = isLight => {
+  renderVideoItemDetails = isLight => {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.success:
@@ -184,11 +268,12 @@ class Gaming extends Component {
                     </Link>
 
                     <Link to="/gaming" style={{textDecoration: 'none'}}>
-                      <GameOptionContainer isLight={isLight}>
-                        <GamingIcon />
-                        <CurrentTitle isLight={isLight}>Gaming</CurrentTitle>
-                      </GameOptionContainer>
+                      <EachOptionContainer isLight={isLight}>
+                        <GamingIcon isLight={isLight} />
+                        <HomeTitle isLight={isLight}>Gaming</HomeTitle>
+                      </EachOptionContainer>
                     </Link>
+
                     <Link to="/saved-videos" style={{textDecoration: 'none'}}>
                       <EachOptionContainer>
                         <SavedVideoIcon isLight={isLight} />
@@ -219,7 +304,7 @@ class Gaming extends Component {
                     </ContactDescription>
                   </ContactContainer>
                 </SideMenuContainer>
-                {this.renderGamingVideosPage(isLight)}
+                {this.renderVideoItemDetails(isLight)}
               </GamingContainer>
             </>
           )
@@ -229,4 +314,4 @@ class Gaming extends Component {
   }
 }
 
-export default Gaming
+export default VideoItemDetails

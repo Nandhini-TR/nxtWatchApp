@@ -30,7 +30,7 @@ export const EachOptionContainer = styled.div`
   width: 200px;
 `
 export const GameOptionContainer = styled(EachOptionContainer)`
-  background-color: ${props => (props.isLight ? '#cbd5e1' : '#606060')}
+  background-color: ${props => (props.isLight ? '#cbd5e1' : '#606060')};
 `
 
 export const HomeIcon = styled(MdHome)`
@@ -57,7 +57,7 @@ export const TrendingIcon = styled(HiFire)`
   margin-top: 5px;
 `
 export const GamingIcon = styled(SiYoutubegaming)`
-  color:  #ff0000;
+  color: #ff0000;
   font-size: 20px;
   margin-left: 10px;
   margin-top: 5px;
@@ -138,9 +138,9 @@ export const TrendingBanner = styled(EachOptionContainer)`
   width: 100vw;
   height: 100px;
   padding-left: 30px;
-@media screen and (max-width: 576px){
-  height: 50px;
-}
+  @media screen and (max-width: 576px) {
+    height: 50px;
+  }
 `
 export const IconContainer = styled.div`
   border-radius: 50px;
@@ -148,24 +148,24 @@ export const IconContainer = styled.div`
   height: 55px;
   width: 55px;
   margin-right: 20px;
-@media screen and (max-width: 576px){
-  height: 30px;
-  width: 30px;
-}
+  @media screen and (max-width: 576px) {
+    height: 30px;
+    width: 30px;
+  }
 `
 export const TrendingIconBanner = styled(GamingIcon)`
   font-size: 35px;
-@media screen and (max-width: 576px){
-  font-size: 20px;
-}
+  @media screen and (max-width: 576px) {
+    font-size: 20px;
+  }
 `
 export const TrendingBannerHeading = styled.h1`
   font-size: 35px;
   font-weight: bold;
   color: ${props => (props.isLight ? '#000000' : '#ffffff')};
-@media screen and (max-width: 576px){
-  font-size: 20px;
-}
+  @media screen and (max-width: 576px) {
+    font-size: 20px;
+  }
 `
 export const TrendingBgContainer = styled.ul`
   background-color: ${props => (props.isLight ? ' #f1f1f1' : '#000000')};
@@ -185,10 +185,10 @@ export const GamingListContainer = styled.li`
 export const Image = styled.img`
   height: 200px;
   width: 150px;
-@media screen and (max-width: 576px){
-  height: 100px;
-  width: 50px;
-}
+  @media screen and (max-width: 576px) {
+    height: 100px;
+    width: 50px;
+  }
 `
 export const ImageTitle = styled.h1`
   font-size: 20px;
@@ -197,16 +197,16 @@ export const ImageTitle = styled.h1`
   width: 400px;
   margin-top: 0px;
   margin-bottom: 0px;
-@media screen and (max-width: 576px){
-  font-size: 14px;
-}
+  @media screen and (max-width: 576px) {
+    font-size: 14px;
+  }
 `
 export const ImageName = styled.p`
   font-size: 14px;
   color: ${props => (props.isLight ? '#616e7c' : '#94a3b8')};
   margin-top: 0px;
   margin-bottom: 0px;
-@media screen and (max-width: 576px){
-  font-size: 10px;
-}
+  @media screen and (max-width: 576px) {
+    font-size: 10px;
+  }
 `

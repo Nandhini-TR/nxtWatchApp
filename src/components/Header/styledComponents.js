@@ -31,12 +31,12 @@ export const ThemeButton = styled.button`
 export const SunLogo = styled(IoSunnyOutline)`
   color: #ffffff;
   margin-right: 10px;
-  font-size:30px;
+  font-size: 30px;
 `
 export const MoonLogo = styled(IoMoon)`
   color: #000000;
   margin-right: 10px;
-  font-size:30px;
+  font-size: 30px;
 `
 
 export const ProfileImage = styled.img`

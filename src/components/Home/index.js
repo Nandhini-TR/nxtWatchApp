@@ -78,7 +78,6 @@ class Home extends Component {
 
     if (response.ok) {
       const data = await response.json()
-      console.log(data)
       const updatedData = data.videos.map(eachVideo => ({
         channel: {
           name: eachVideo.channel.name,
@@ -90,8 +89,6 @@ class Home extends Component {
         title: eachVideo.title,
         viewCount: eachVideo.view_count,
       }))
-
-      console.log(updatedData)
 
       this.setState({
         videos: updatedData,
@@ -121,25 +118,30 @@ class Home extends Component {
 
               return (
                 <List key={eachItem.id}>
-                  <ListImage
-                    src={eachItem.thumbnailUrl}
-                    alt="video thumbnail"
-                  />
-                  <EachOptionContainer>
-                    <EachLogo
-                      src={eachItem.channel.profileImageUrl}
-                      alt="profile-image"
+                  <Link
+                    to={`/videos/${eachItem.id}`}
+                    style={{textDecoration: 'none'}}
+                  >
+                    <ListImage
+                      src={eachItem.thumbnailUrl}
+                      alt="video thumbnail"
                     />
-                    <SuccessTitle isLight={isLight}>
-                      {eachItem.title}
-                    </SuccessTitle>
-                  </EachOptionContainer>
-                  <SuccessName isLight={isLight}>
-                    {eachItem.channel.name}
-                  </SuccessName>
-                  <SuccessName isLight={isLight}>
-                    {`${eachItem.viewCount} views • ${publishedDistance}`}
-                  </SuccessName>
+                    <EachOptionContainer>
+                      <EachLogo
+                        src={eachItem.channel.profileImageUrl}
+                        alt="profile-image"
+                      />
+                      <SuccessTitle isLight={isLight}>
+                        {eachItem.title}
+                      </SuccessTitle>
+                    </EachOptionContainer>
+                    <SuccessName isLight={isLight}>
+                      {eachItem.channel.name}
+                    </SuccessName>
+                    <SuccessName isLight={isLight}>
+                      {`${eachItem.viewCount} views • ${publishedDistance}`}
+                    </SuccessName>
+                  </Link>
                 </List>
               )
             })}
@@ -229,7 +231,6 @@ class Home extends Component {
               <HomeContainer isLight={isLight}>
                 <SideMenuContainer>
                   <HomeSideContainer>
-                  
                     <Link to="/" style={{textDecoration: 'none'}}>
                       <HomeOptionContainer isLight={isLight}>
                         <HomeIcon isLight={isLight} />
@@ -251,7 +252,7 @@ class Home extends Component {
                       </EachOptionContainer>
                     </Link>
 
-                    <Link to="/" style={{textDecoration: 'none'}}>
+                    <Link to="/saved-videos" style={{textDecoration: 'none'}}>
                       <EachOptionContainer>
                         <SavedVideoIcon isLight={isLight} />
                         <HomeTitle isLight={isLight}>Saved videos</HomeTitle>

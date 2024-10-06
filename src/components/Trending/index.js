@@ -109,18 +109,23 @@ class Trending extends Component {
             })
             return (
               <TrendingListContainer key={eachVideo.id}>
-                <Image src={eachVideo.thumbnailUrl} alt="video thumbnail" />
-                <HomeSideContainer>
-                  <ImageTitle isLight={isLight}>{eachVideo.title}</ImageTitle>
-                  <ImageName isLight={isLight}>
-                    {eachVideo.channel.name}
-                  </ImageName>
-                  <TrendingListContainer>
+                <Link
+                  to={`/videos/${eachVideo.id}`}
+                  style={{textDecoration: 'none'}}
+                >
+                  <Image src={eachVideo.thumbnailUrl} alt="video thumbnail" />
+                  <HomeSideContainer>
+                    <ImageTitle isLight={isLight}>{eachVideo.title}</ImageTitle>
                     <ImageName isLight={isLight}>
-                      {`${eachVideo.viewCount} views . ${publishedDate}`}
+                      {eachVideo.channel.name}
                     </ImageName>
-                  </TrendingListContainer>
-                </HomeSideContainer>
+                    <TrendingListContainer>
+                      <ImageName isLight={isLight}>
+                        {`${eachVideo.viewCount} views . ${publishedDate}`}
+                      </ImageName>
+                    </TrendingListContainer>
+                  </HomeSideContainer>
+                </Link>
               </TrendingListContainer>
             )
           })}
@@ -173,8 +178,6 @@ class Trending extends Component {
   }
 
   render() {
-    const {trendingVideosList} = this.state
-    console.log(trendingVideosList)
     return (
       <ThemeContext.Consumer>
         {value => {
@@ -185,28 +188,28 @@ class Trending extends Component {
               <TrendingContainer isLight={isLight}>
                 <SideMenuContainer>
                   <HomeSideContainer>
-                    <Link to="/" style={{ textDecoration: 'none' }}>
+                    <Link to="/" style={{textDecoration: 'none'}}>
                       <EachOptionContainer>
                         <HomeIcon isLight={isLight} />
                         <HomeTitle isLight={isLight}>Home</HomeTitle>
                       </EachOptionContainer>
                     </Link>
 
-                    <Link to="/trending" style={{ textDecoration: 'none' }}>
+                    <Link to="/trending" style={{textDecoration: 'none'}}>
                       <TrendingOptionContainer isLight={isLight}>
                         <TrendingIcon />
                         <CurrentTitle isLight={isLight}>Trending</CurrentTitle>
                       </TrendingOptionContainer>
                     </Link>
 
-                    <Link to="/gaming" style={{ textDecoration: 'none' }}>
+                    <Link to="/gaming" style={{textDecoration: 'none'}}>
                       <EachOptionContainer>
                         <GamingIcon isLight={isLight} />
                         <HomeTitle isLight={isLight}>Gaming</HomeTitle>
                       </EachOptionContainer>
                     </Link>
 
-                    <Link to="/" style={{ textDecoration: 'none' }}>
+                    <Link to="/saved-videos" style={{textDecoration: 'none'}}>
                       <EachOptionContainer>
                         <SavedVideoIcon isLight={isLight} />
                         <HomeTitle isLight={isLight}>Saved videos</HomeTitle>

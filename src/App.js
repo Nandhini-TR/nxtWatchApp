@@ -5,6 +5,7 @@ import LoginForm from './components/LoginForm'
 import Home from './components/Home'
 import Trending from './components/Trending'
 import Gaming from './components/Gaming'
+import VideoItemDetails from './components/VideoItemDetails'
 import './App.css'
 
 class App extends Component {
@@ -29,6 +30,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/trending" component={Trending} />
           <Route exact path="/gaming" component={Gaming} />
+          <Route exact path="/videos/:id" component={VideoItemDetails} />
         </Switch>
       </ThemeContext.Provider>
     )

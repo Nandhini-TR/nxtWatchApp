@@ -72,8 +72,13 @@ class LoginForm extends Component {
   }
 
   render() {
-    const {username, password, showPassword, showSubmitError, errorMsg} =
-      this.state
+    const {
+      username,
+      password,
+      showPassword,
+      showSubmitError,
+      errorMsg,
+    } = this.state
 
     const passwordType = showPassword ? 'text' : 'password'
 
