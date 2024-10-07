@@ -74,3 +74,37 @@ export const LogoutIcon = styled(FiLogOut)`
     display: none;
   }
 `
+export const PopupContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: ${props => (props.isLight ? '#f9f9f9' : '#181818')};
+  border-radius: 10px;
+`
+export const PopupDescription = styled.p`
+  color: ${props => (props.isLight ? '#00306e' : '#f8fafc')};
+  font-size: 14px;
+  @media screen and (max-width: 576px) {
+    font-size: 10px;
+  }
+`
+export const ButtonContainer = styled.div`
+  display: flex;
+`
+export const CancelButton = styled.button`
+  border-radius: 2px;
+  border: ${props =>
+    props.isLight ? '1px solid #cccccc' : '1px solid #f8fafc'};
+  background: transparent;
+  color: ${props => (props.isLight ? '#94a3b8' : '#cbd5e1')};
+  font-weight: bold;
+  margin: 10px;
+  text-align: center;
+  height: 40px;
+  padding: 10px;
+`
+export const ConfirmButton = styled(CancelButton)`
+  color: #ffffff;
+  background: #3b82f6;
+  border: 0px none;
+`

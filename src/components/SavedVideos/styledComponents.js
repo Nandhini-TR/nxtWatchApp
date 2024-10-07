@@ -55,7 +55,7 @@ export const TrendingOptionContainer = styled(EachOptionContainer)`
 `
 
 export const TrendingIcon = styled(HiFire)`
-  color: #ff0000;
+  color: ${props => (props.isLight ? '#424242' : '#cccccc')};
   font-size: 20px;
   margin-left: 10px;
   margin-top: 5px;
@@ -68,7 +68,7 @@ export const GamingIcon = styled(SiYoutubegaming)`
 `
 
 export const SavedVideoIcon = styled(MdPlaylistAdd)`
-  color: ${props => (props.isLight ? '#424242' : '#cccccc')};
+  color: #ff0000;
   font-size: 20px;
   margin-left: 10px;
   margin-top: 5px;
@@ -98,43 +98,7 @@ export const HomePageContainer = styled.div`
   flex-direction: column;
   padding-left: 20px;
 `
-export const FailureContainer = styled(HomePageContainer)`
-  justify-content: center;
-  align-items: center;
-`
 
-export const FailureImage = styled.img`
-  height: 200px;
-  @media screen and (max-width: 576px) {
-    height: 100px;
-  }
-`
-
-export const FailureDescriptionHeading = styled.h1`
-  font-size: 18px;
-  font-weight: bold;
-  font-family: 'Roboto';
-  color: ${props => (props.isLight ? '#000000' : '#ffffff')};
-  @media screen and (max-width: 576px) {
-    font-size: 12px;
-  }
-`
-
-export const FailureDescription = styled.p`
-  font-size: 16px;
-  color: ${props => (props.isLight ? '#606060' : '#94a3b8')};
-  font-family: 'Roboto';
-`
-export const RetryButton = styled.button`
-  height: 25px;
-  width: 80px;
-  font-size: 16px;
-  color: #ffffff;
-  background-color: #3b82f6;
-  border-radius: 3px;
-  border: 0px none;
-  text-align: center;
-`
 export const TrendingBanner = styled(EachOptionContainer)`
   justify-content: start;
   height: 60px;
@@ -158,7 +122,8 @@ export const IconContainer = styled.div`
     width: 30px;
   }
 `
-export const TrendingIconBanner = styled(TrendingIcon)`
+export const SavedIconBanner = styled(HiFire)`
+  color: #ff0000;
   font-size: 35px;
   @media screen and (max-width: 576px) {
     font-size: 20px;
@@ -180,16 +145,14 @@ export const TrendingBgContainer = styled.ul`
   justify-content: center;
   margin-top: 0px;
   overflow-y: scroll;
-  padding: 15px;
 `
 export const TrendingListContainer = styled.li`
   display: flex;
   margin-bottom: 10px;
 `
 export const Image = styled.img`
-  height: 250px;
-  width: 100%;
-  object-fit: cover;
+  height: 150px;
+  width: 300px;
   @media screen and (max-width: 576px) {
     height: 50px;
     width: 100px;
@@ -201,8 +164,7 @@ export const ImageTitle = styled.h1`
   color: ${props => (props.isLight ? '#000000' : '#ffffff')};
   width: 400px;
   @media screen and (max-width: 576px) {
-    font-size: 10px;
-    width: 250px;
+    font-size: 14px;
   }
 `
 export const ImageName = styled.p`
@@ -212,5 +174,11 @@ export const ImageName = styled.p`
   margin-bottom: 0px;
   @media screen and (max-width: 576px) {
     font-size: 10px;
+  }
+`
+export const NoVideosImage = styled.img`
+  height: 250px;
+  @media screen and (max-width: 576px) {
+    height: 150px;
   }
 `

@@ -35,7 +35,9 @@ import {
   ImageName,
   LikeIcon,
   DisLikeIcon,
+  SaveButton,
   SaveIcon,
+  SavedIcon,
   Line,
   ProfileImage,
   ChannelContainer,
@@ -55,6 +57,7 @@ class VideoItemDetails extends Component {
     videoItemList: {},
     isLiked: false,
     isDisLiked: false,
+    isSaved: false,
   }
 
   componentDidMount() {
@@ -116,14 +119,31 @@ class VideoItemDetails extends Component {
 
   onClickDisLike = () => {
     this.setState(prevState => ({
-      isDisLiked: !prevState.isLiked,
+      isDisLiked: !prevState.isDisLiked,
       isLiked: false,
     }))
   }
 
-  renderSuccess = isLight => {
+  onClickSave = toggleSavedVideos => {
+    const {videoItemList} = this.state
+
+    if (videoItemList && videoItemList.videoDetails) {
+      const {videoDetails} = videoItemList
+
+      toggleSavedVideos(videoDetails)
+
+      this.setState(prevState => ({
+        isSaved: !prevState.isSaved,
+      }))
+    }
+  }
+
+  renderSuccess = (isLight, toggleSavedVideos, savedVideos) => {
     const {videoItemList, isLiked, isDisLiked} = this.state
 
+    const isSaved = savedVideos.some(
+      eachVideo => eachVideo.id === videoItemList.videoDetails.id,
+    )
     const {
       title,
       videoUrl,
@@ -178,9 +198,21 @@ class VideoItemDetails extends Component {
                 />{' '}
                 DisLike
               </DisLikeButton>
-              <LikeButton isLight={isLight}>
-                <SaveIcon isLight={isLight} /> Save
-              </LikeButton>
+              <SaveButton
+                isLight={isLight}
+                isSaved={isSaved}
+                onClick={() => this.onClickSave(toggleSavedVideos)}
+              >
+                {isSaved ? (
+                  <>
+                    <SavedIcon /> Saved
+                  </>
+                ) : (
+                  <>
+                    <SaveIcon isLight={isLight} /> Save{' '}
+                  </>
+                )}
+              </SaveButton>
             </LikesContainer>
           </VideoDetailsContainer>
           <Line isLight={isLight} />
@@ -228,11 +260,11 @@ class VideoItemDetails extends Component {
     </div>
   )
 
-  renderVideoItemDetails = isLight => {
+  renderVideoItemDetails = (isLight, toggleSavedVideos, savedVideos) => {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.success:
-        return this.renderSuccess(isLight)
+        return this.renderSuccess(isLight, toggleSavedVideos, savedVideos)
       case apiStatusConstants.failure:
         return this.renderFailure(isLight)
       case apiStatusConstants.inProgress:
@@ -246,7 +278,7 @@ class VideoItemDetails extends Component {
     return (
       <ThemeContext.Consumer>
         {value => {
-          const {isLight} = value
+          const {isLight, toggleSavedVideos, savedVideos} = value
           return (
             <>
               <Header />
@@ -304,7 +336,11 @@ class VideoItemDetails extends Component {
                     </ContactDescription>
                   </ContactContainer>
                 </SideMenuContainer>
-                {this.renderVideoItemDetails(isLight)}
+                {this.renderVideoItemDetails(
+                  isLight,
+                  toggleSavedVideos,
+                  savedVideos,
+                )}
               </GamingContainer>
             </>
           )

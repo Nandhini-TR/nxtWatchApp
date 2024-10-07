@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {MdHome, MdPlaylistAdd} from 'react-icons/md'
+import {MdHome, MdPlaylistAdd, MdPlaylistAddCheck} from 'react-icons/md'
 import {HiFire} from 'react-icons/hi'
 import {SiYoutubegaming} from 'react-icons/si'
 import {BiLike, BiDislike} from 'react-icons/bi'
@@ -183,6 +183,16 @@ export const LikeButton = styled.button`
     return props.isLight ? '#616e7c' : '#94a3b8'
   }};
 `
+export const SaveButton = styled(LikeButton)`
+  border: 0px none;
+  background: transparent;
+  color: ${props => {
+    if (props.isSaved) {
+      return '#3b82f6'
+    }
+    return props.isLight ? '#616e7c' : '#94a3b8'
+  }};
+`
 
 export const LikeIcon = styled(BiLike)`
   color: ${props => {
@@ -223,10 +233,15 @@ export const DisLikeButton = styled.button`
   }};
 `
 
+export const SavedIcon = styled(MdPlaylistAddCheck)`
+  color: 3b82f6;
+  font-size: 18px;
+`
 export const SaveIcon = styled(MdPlaylistAdd)`
   color: ${props => (props.isLight ? '#616e7c' : '#94a3b8')};
   font-size: 18px;
 `
+
 export const Line = styled.hr`
   color: ${props => (props.isLight ? '#616e7c' : '#94a3b8')};
 `

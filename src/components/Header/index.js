@@ -1,4 +1,7 @@
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
+import Cookies from 'js-cookie'
+import Popup from 'reactjs-popup'
+import 'reactjs-popup/dist/index.css'
 import ThemeContext from '../../context/ThemeContext'
 
 import {
@@ -12,9 +15,14 @@ import {
   LogoutIcon,
   SunLogo,
   MoonLogo,
+  PopupContainer,
+  PopupDescription,
+  ButtonContainer,
+  CancelButton,
+  ConfirmButton,
 } from './styledComponents'
 
-const Header = () => (
+const Header = props => (
   <ThemeContext.Consumer>
     {value => {
       const {isLight, toggleTheme} = value
@@ -26,6 +34,7 @@ const Header = () => (
       const onChangeTheme = () => {
         toggleTheme()
       }
+
       return (
         <Navbar isLight={isLight}>
           <Link to="/">
@@ -43,7 +52,51 @@ const Header = () => (
 
             <HamburgerMenu isLight={isLight} />
             <LogoutIcon isLight={isLight} />
-            <Logout isLight={isLight}>Logout</Logout>
+            <Popup
+              modal
+              trigger={<Logout isLight={isLight}>Logout</Logout>}
+              contentStyle={{
+                borderRadius: '10px',
+                height: '150px',
+                textAlign: 'center',
+                width: '30%',
+                backgroundColor: isLight ? '#f9f9f9' : '#181818',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                border: '0px none',
+              }}
+            >
+              {close => (
+                <PopupContainer isLight={isLight}>
+                  <PopupDescription isLight={isLight}>
+                    Are you sure you want to logout?
+                  </PopupDescription>
+                  <ButtonContainer>
+                    <CancelButton
+                      isLight={isLight}
+                      type="button"
+                      className="cancel-button"
+                      onClick={() => close()}
+                    >
+                      Cancel
+                    </CancelButton>
+
+                    <ConfirmButton
+                      type="button"
+                      className="confirm-button"
+                      onClick={() => {
+                        Cookies.remove('jwt_token')
+                        const {history} = props
+                        history.replace('/login')
+                      }}
+                    >
+                      Confirm
+                    </ConfirmButton>
+                  </ButtonContainer>
+                </PopupContainer>
+              )}
+            </Popup>
           </ProfileContainer>
         </Navbar>
       )
@@ -51,4 +104,4 @@ const Header = () => (
   </ThemeContext.Consumer>
 )
 
-export default Header
+export default withRouter(Header)
