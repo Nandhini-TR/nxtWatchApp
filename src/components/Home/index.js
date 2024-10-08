@@ -42,6 +42,8 @@ import {
   ListImage,
   SuccessTitle,
   SuccessName,
+  SearchButton,
+  ListContainer,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -129,7 +131,7 @@ class Home extends Component {
                     <EachOptionContainer>
                       <EachLogo
                         src={eachItem.channel.profileImageUrl}
-                        alt="profile-image"
+                        alt="channel logo"
                       />
                       <SuccessTitle isLight={isLight}>
                         {eachItem.title}
@@ -225,39 +227,46 @@ class Home extends Component {
       <ThemeContext.Consumer>
         {value => {
           const {isLight} = value
+          const navItemsList = [
+            {
+              id: 1,
+              path: '/',
+              label: 'Home',
+              icon: <HomeIcon isLight={isLight} />,
+            },
+            {
+              id: 2,
+              path: '/trending',
+              label: 'Trending',
+              icon: <TrendingIcon isLight={isLight} />,
+            },
+            {
+              id: 3,
+              path: '/gaming',
+              label: 'Gaming',
+              icon: <GamingIcon isLight={isLight} />,
+            },
+            {
+              id: 4,
+              path: '/saved-videos',
+              label: 'Saved videos',
+              icon: <SavedVideoIcon isLight={isLight} />,
+            },
+          ]
           return (
             <>
               <Header />
-              <HomeContainer isLight={isLight}>
+              <HomeContainer isLight={isLight} data-testid="home">
                 <SideMenuContainer>
                   <HomeSideContainer>
-                    <Link to="/" style={{textDecoration: 'none'}}>
-                      <HomeOptionContainer isLight={isLight}>
-                        <HomeIcon isLight={isLight} />
-                        <CurrentTitle isLight={isLight}>Home</CurrentTitle>
-                      </HomeOptionContainer>
-                    </Link>
-
-                    <Link to="/trending" style={{textDecoration: 'none'}}>
-                      <EachOptionContainer>
-                        <TrendingIcon isLight={isLight} />
-                        <HomeTitle isLight={isLight}>Trending</HomeTitle>
-                      </EachOptionContainer>
-                    </Link>
-
-                    <Link to="/gaming" style={{textDecoration: 'none'}}>
-                      <EachOptionContainer>
-                        <GamingIcon isLight={isLight} />
-                        <HomeTitle isLight={isLight}>Gaming</HomeTitle>
-                      </EachOptionContainer>
-                    </Link>
-
-                    <Link to="/saved-videos" style={{textDecoration: 'none'}}>
-                      <EachOptionContainer>
-                        <SavedVideoIcon isLight={isLight} />
-                        <HomeTitle isLight={isLight}>Saved videos</HomeTitle>
-                      </EachOptionContainer>
-                    </Link>
+                    {navItemsList.map(item => (
+                      <ListContainer key={item.id}>
+                        <Link to={item.path} style={{textDecoration: 'none'}}>
+                          {item.icon}
+                          <HomeTitle isLight={isLight}>{item.label}</HomeTitle>
+                        </Link>
+                      </ListContainer>
+                    ))}
                   </HomeSideContainer>
                   <ContactContainer>
                     <ContactHeading isLight={isLight}>
@@ -284,7 +293,7 @@ class Home extends Component {
                 </SideMenuContainer>
                 <HomePageContainer>
                   {isBannerActive && (
-                    <BannerContainer>
+                    <BannerContainer data-testid="banner">
                       <NxtLogoContainer>
                         <NxtImage
                           src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
@@ -313,10 +322,13 @@ class Home extends Component {
                         value={searchInput}
                         onChange={this.handleSearchInput}
                       />
-                      <SearchIcon
-                        isLight={isLight}
+                      <SearchButton
+                        type="button"
                         onClick={this.onClickSearch}
-                      />
+                        data-testid="searchButton"
+                      >
+                        <SearchIcon isLight={isLight} />
+                      </SearchButton>
                     </SearchContainer>
                     {this.renderVideoPage(isLight)}
                   </HomePageContainer>

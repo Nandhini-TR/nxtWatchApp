@@ -38,7 +38,7 @@ const Header = props => (
       return (
         <Navbar isLight={isLight}>
           <Link to="/">
-            <Image src={imgLogo} alt="nxt watch logo" />
+            <Image src={imgLogo} alt="website logo" />
           </Link>
           <ProfileContainer>
             <ThemeButton data-testid="theme" onClick={onChangeTheme}>
@@ -70,7 +70,7 @@ const Header = props => (
               {close => (
                 <PopupContainer isLight={isLight}>
                   <PopupDescription isLight={isLight}>
-                    Are you sure you want to logout?
+                    Are you sure, you want to logout
                   </PopupDescription>
                   <ButtonContainer>
                     <CancelButton

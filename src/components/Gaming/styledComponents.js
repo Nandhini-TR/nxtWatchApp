@@ -20,7 +20,7 @@ export const SideMenuContainer = styled.div`
     display: none;
   }
 `
-export const HomeSideContainer = styled.div`
+export const HomeSideContainer = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: baseline;
@@ -71,6 +71,9 @@ export const SavedVideoIcon = styled(MdPlaylistAdd)`
 `
 export const ContactContainer = styled(HomeSideContainer)`
   padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
 `
 
 export const ContactHeading = styled.p`
@@ -190,7 +193,7 @@ export const Image = styled.img`
     width: 50px;
   }
 `
-export const ImageTitle = styled.h1`
+export const ImageTitle = styled.p`
   font-size: 20px;
   font-weight: bold;
   color: ${props => (props.isLight ? '#000000' : '#ffffff')};

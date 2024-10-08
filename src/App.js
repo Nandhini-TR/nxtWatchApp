@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 import ThemeContext from './context/ThemeContext'
 import LoginForm from './components/LoginForm'
 import Home from './components/Home'
@@ -60,7 +60,8 @@ class App extends Component {
             component={VideoItemDetails}
           />
           <ProtectedRoute exact path="/saved-videos" component={SavedVideos} />
-          <ProtectedRoute component={NotFound} />
+          <Route path="/bad-path" component={NotFound} />
+          <Redirect to="not-found" />
         </Switch>
       </ThemeContext.Provider>
     )

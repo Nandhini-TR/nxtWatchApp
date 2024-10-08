@@ -21,7 +21,7 @@ export const SideMenuContainer = styled.div`
     display: none;
   }
 `
-export const HomeSideContainer = styled.div`
+export const HomeSideContainer = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: baseline;
@@ -30,6 +30,11 @@ export const EachOptionContainer = styled.div`
   display: flex;
   width: 200px;
 `
+export const ListContainer = styled.li`
+  display: flex;
+  width: 200px;
+`
+
 export const HomeOptionContainer = styled(EachOptionContainer)`
   background-color: ${props => (props.isLight ? '#cbd5e1' : '#606060')};
 `
@@ -71,6 +76,9 @@ export const SavedVideoIcon = styled(MdPlaylistAdd)`
   margin-top: 5px;
 `
 export const ContactContainer = styled(HomeSideContainer)`
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
   padding-left: 10px;
 `
 
@@ -160,6 +168,12 @@ export const Input = styled.input`
     width: 200px;
   }
 `
+
+export const SearchButton = styled.button`
+  background: transparent;
+  border: 0px none;
+`
+
 export const SearchIcon = styled(GoSearch)`
   border: ${props =>
     props.isLight ? '1px solid #ebebeb' : '1px solid #383838'};
@@ -225,9 +239,13 @@ export const ListImage = styled.img`
   height: 200px;
   width: 300px;
 `
-export const SuccessTitle = styled(HomeTitle)`
+export const SuccessTitle = styled.p`
   font-weight: none;
   margin-bottom: 0px;
+  color: ${props => (props.isLight ? '#212121' : '#ffffff')};
+  font-size: 14px;
+  margin-bottom: 20px;
+  margin-left: 10px;
 `
 export const SuccessName = styled.p`
   font-size: 14px;

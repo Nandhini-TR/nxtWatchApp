@@ -21,7 +21,7 @@ export const SideMenuContainer = styled.div`
     display: none;
   }
 `
-export const HomeSideContainer = styled.div`
+export const HomeSideContainer = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: baseline;
@@ -65,8 +65,11 @@ export const SavedVideoIcon = styled(MdPlaylistAdd)`
   margin-top: 5px;
 `
 
-export const ContactContainer = styled(HomeSideContainer)`
+export const ContactContainer = styled.div`
   padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
 `
 
 export const ContactHeading = styled.p`
@@ -142,7 +145,7 @@ export const VideoDetailsBgContainer = styled.div`
   flex-wrap: wrap;
 `
 
-export const ImageTitle = styled.h1`
+export const ImageTitle = styled.p`
   font-size: 14px;
   font-weight: 400;
   color: ${props => (props.isLight ? '#212121' : '#f9f9f9')};
@@ -175,10 +178,10 @@ export const LikeButton = styled.button`
   background: transparent;
   color: ${props => {
     if (props.isLiked) {
-      return '#3b82f6'
+      return '#2563eb'
     }
     if (props.isDisLiked) {
-      return '#616e7c'
+      return '#64748b'
     }
     return props.isLight ? '#616e7c' : '#94a3b8'
   }};
@@ -188,7 +191,7 @@ export const SaveButton = styled(LikeButton)`
   background: transparent;
   color: ${props => {
     if (props.isSaved) {
-      return '#3b82f6'
+      return '#2563eb'
     }
     return props.isLight ? '#616e7c' : '#94a3b8'
   }};
@@ -197,10 +200,10 @@ export const SaveButton = styled(LikeButton)`
 export const LikeIcon = styled(BiLike)`
   color: ${props => {
     if (props.isLiked) {
-      return '#3b82f6'
+      return '#2563eb'
     }
     if (props.isDisLiked) {
-      return '#616e7c'
+      return '#64748b'
     }
     return props.isLight ? '#616e7c' : '#94a3b8'
   }};
@@ -209,10 +212,10 @@ export const LikeIcon = styled(BiLike)`
 export const DisLikeIcon = styled(BiDislike)`
   color: ${props => {
     if (props.isDisLiked) {
-      return '#3b82f6'
+      return '#2563eb'
     }
     if (props.isLiked) {
-      return '#616e7c'
+      return '#64748b'
     }
     return props.isLight ? '#616e7c' : '#94a3b8'
   }};
@@ -224,10 +227,10 @@ export const DisLikeButton = styled.button`
   background: transparent;
   color: ${props => {
     if (props.isDisLiked) {
-      return '#3b82f6'
+      return '#2563eb'
     }
     if (props.isLiked) {
-      return '#616e7c'
+      return '#64748b'
     }
     return props.isLight ? '#616e7c' : '#94a3b8'
   }};

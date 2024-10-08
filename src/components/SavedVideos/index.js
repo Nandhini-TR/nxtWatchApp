@@ -23,13 +23,14 @@ import {
   TrendingBanner,
   IconContainer,
   SavedIconBanner,
-  TrendingBannerHeading,
+  Title,
   TrendingBgContainer,
   TrendingListContainer,
   Image,
   ImageTitle,
   ImageName,
   NoVideosImage,
+  NoVideosTitle,
 } from './styledComponents'
 
 class SavedVideos extends Component {
@@ -44,7 +45,7 @@ class SavedVideos extends Component {
               src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-saved-videos-img.png"
               alt="no saved videos"
             />
-            <ImageTitle>No saved videos found</ImageTitle>
+            <NoVideosTitle>No saved videos found</NoVideosTitle>
             <ImageName>You can save your videos while watching them</ImageName>
           </HomePageContainer>
         ) : (
@@ -53,9 +54,7 @@ class SavedVideos extends Component {
               <IconContainer isLight={isLight}>
                 <SavedIconBanner />
               </IconContainer>
-              <TrendingBannerHeading isLight={isLight}>
-                Saved Videos
-              </TrendingBannerHeading>
+              <Title isLight={isLight}>Saved Videos</Title>
             </TrendingBanner>
             <TrendingBgContainer isLight={isLight}>
               {savedVideos.map(eachVideo => {
@@ -116,10 +115,10 @@ class SavedVideos extends Component {
                     </Link>
 
                     <Link to="/trending" style={{textDecoration: 'none'}}>
-                      <TrendingOptionContainer isLight={isLight}>
+                      <EachOptionContainer>
                         <TrendingIcon isLight={isLight} />
                         <HomeTitle isLight={isLight}>Trending</HomeTitle>
-                      </TrendingOptionContainer>
+                      </EachOptionContainer>
                     </Link>
 
                     <Link to="/gaming" style={{textDecoration: 'none'}}>
@@ -130,12 +129,12 @@ class SavedVideos extends Component {
                     </Link>
 
                     <Link to="/saved-videos" style={{textDecoration: 'none'}}>
-                      <EachOptionContainer>
+                      <TrendingOptionContainer isLight={isLight}>
                         <SavedVideoIcon />
                         <CurrentTitle isLight={isLight}>
                           Saved videos
                         </CurrentTitle>
-                      </EachOptionContainer>
+                      </TrendingOptionContainer>
                     </Link>
                   </HomeSideContainer>
                   <ContactContainer>

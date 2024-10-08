@@ -217,7 +217,7 @@ class VideoItemDetails extends Component {
           </VideoDetailsContainer>
           <Line isLight={isLight} />
           <ChannelContainer>
-            <ProfileImage src={profileImageUrl} alt="" />
+            <ProfileImage src={profileImageUrl} alt="channel logo" />
             <HomeSideContainer>
               <ImageTitle isLight={isLight}>{name}</ImageTitle>
               <ImageName isLight={isLight}>

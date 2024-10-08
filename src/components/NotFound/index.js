@@ -91,7 +91,7 @@ const NotFound = () => (
                   Page Not Found
                 </NotfoundDescriptionHeading>
                 <NotfoundDescription isLight={isLight}>
-                  We are sorry, the page you are requested could not be found
+                  we are sorry, the page you requested could not be found.
                 </NotfoundDescription>
               </NotfoundContainer>
             </NotfoundPageContainer>

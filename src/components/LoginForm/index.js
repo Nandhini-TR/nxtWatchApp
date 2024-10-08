@@ -28,6 +28,14 @@ class LoginForm extends Component {
     errorMsg: '',
   }
 
+  componentDidMount() {
+    const token = Cookies.get('jwt_token')
+    if (token !== undefined) {
+      const {history} = this.props
+      history.replace('/')
+    }
+  }
+
   onChangeUsername = event => {
     this.setState({username: event.target.value})
   }
@@ -108,7 +116,7 @@ class LoginForm extends Component {
           return (
             <LoginBgContainer>
               <LoginContainer>
-                <Image src={imgLogo} alt="nxt watch logo" />
+                <Image src={imgLogo} alt="website logo" />
                 <Form onSubmit={this.onSubmitForm}>
                   <Label htmlFor="Username">USERNAME</Label>
                   <Input

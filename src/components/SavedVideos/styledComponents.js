@@ -20,7 +20,7 @@ export const SideMenuContainer = styled.div`
     display: none;
   }
 `
-export const HomeSideContainer = styled.div`
+export const HomeSideContainer = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: baseline;
@@ -75,6 +75,10 @@ export const SavedVideoIcon = styled(MdPlaylistAdd)`
 `
 export const ContactContainer = styled(HomeSideContainer)`
   padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  padding-left: 20px;
 `
 
 export const ContactHeading = styled.p`
@@ -99,7 +103,8 @@ export const HomePageContainer = styled.div`
   padding-left: 20px;
 `
 
-export const TrendingBanner = styled(EachOptionContainer)`
+export const TrendingBanner = styled.div`
+  display: flex;
   justify-content: start;
   height: 60px;
   background-color: ${props => (props.isLight ? '#ebebeb' : '#313131')};
@@ -129,7 +134,7 @@ export const SavedIconBanner = styled(HiFire)`
     font-size: 20px;
   }
 `
-export const TrendingBannerHeading = styled.h1`
+export const Title = styled.h1`
   font-size: 35px;
   font-weight: bold;
   color: ${props => (props.isLight ? '#000000' : '#ffffff')};
@@ -158,7 +163,7 @@ export const Image = styled.img`
     width: 100px;
   }
 `
-export const ImageTitle = styled.h1`
+export const ImageTitle = styled.p`
   font-size: 20px;
   font-weight: bold;
   color: ${props => (props.isLight ? '#000000' : '#ffffff')};
@@ -167,6 +172,16 @@ export const ImageTitle = styled.h1`
     font-size: 14px;
   }
 `
+export const NoVideosTitle = styled.h1`
+  font-size: 20px;
+  font-weight: bold;
+  color: ${props => (props.isLight ? '#000000' : '#ffffff')};
+  width: 400px;
+  @media screen and (max-width: 576px) {
+    font-size: 14px;
+  }
+`
+
 export const ImageName = styled.p`
   font-size: 14px;
   color: ${props => (props.isLight ? '#616e7c' : '#94a3b8')};
